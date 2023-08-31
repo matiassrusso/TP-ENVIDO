@@ -1,0 +1,11 @@
+un random del 1 al 4 que determina que a palo tenes
+3 randoms del 1 al 12 que determinan el numero de carta
+hay que juntar los 2, como para que (1, 7) sea 7 de espada, o (4, 10) sea 10 de oro
+
+que las cartas se guarden en una lista. usar append.
+
+
+hacer todo en un while, que sea while puntos jugador <15  se vaya sumando
+
+
+podemos hardcodear y hacer carta por carta y posibilidad por posibilidad. poco efectivo, pero sirve.
