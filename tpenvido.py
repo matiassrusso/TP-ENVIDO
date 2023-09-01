@@ -8,7 +8,7 @@ Created on Thu Aug 31 14:57:05 2023
 puntosj1=0
 puntosj2=0
 
-while puntosj1 < 15 or puntosj2 < 15:
+while puntosj1 < 15 and puntosj2 < 15:
     import random
     cartas = [c for c in range(1, 12) if c not in [8, 9]]
     turno=random.randint(1, 2)
@@ -79,5 +79,7 @@ while puntosj1 < 15 or puntosj2 < 15:
         elif envido == 2:
             noenvidomaq=input('Es el turno de la maquina y paso. Tus cartas son un ' + str(carta1) +', '+ str(carta2) +', '+ str(carta3) +'.Canta envido o pasa.')
 
+else:
+    print("hameover")
             
         
