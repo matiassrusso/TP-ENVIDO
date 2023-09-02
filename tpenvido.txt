@@ -9,3 +9,6 @@ hacer todo en un while, que sea while puntos jugador <15  se vaya sumando
 
 
 podemos hardcodear y hacer carta por carta y posibilidad por posibilidad. poco efectivo, pero sirve.
+
+CORRECCIONES A HACER:
+no pueden salir 2 cartas iguales. recien me salieron dos 11 de basto.

@@ -13,12 +13,15 @@ while puntosj1 < 15 and puntosj2 < 15:
     cartas = [c for c in range(1, 12) if c not in [8, 9]]
     turno=random.randint(1, 2)
 
-    rndcarta1=random.choice(cartas)
+    rndcarta1=random.choice(cartas) 
     rndcarta2=random.choice(cartas)
     rndcarta3=random.choice(cartas)
     tipodecarta1=random.randint(1, 4)
     tipodecarta2=random.randint(1, 4)
     tipodecarta3=random.randint(1, 4)
+    
+    #rndcarta es el numero de la carta
+    #tipodecarta es el palo de la carta
     
     numcartaj1=[]
     numcartaj2=[]
@@ -63,21 +66,39 @@ while puntosj1 < 15 and puntosj2 < 15:
        
     #CALCULO ENVIDO
     envidojug=0
-    if tipodecarta1 == tipodecarta2 or tipodecarta1 == tipodecarta3 or tipodecarta2==tipodecarta3:
+    if tipodecarta1 == tipodecarta2: 
         envidojug=20
+        if rndcarta1 not in (10, 11, 12) and rndcarta2 not in (10, 11, 12):
+            envidojug +=rndcarta1+rndcarta2
+           # print('Tenes un envido de ',envidojug)
+        
+    elif tipodecarta1 == tipodecarta3:
+        envidojug=20
+        if rndcarta1 not in (10, 11, 12) and rndcarta3 not in (10, 11, 12):
+            envidojug +=rndcarta1+rndcarta3
+            #print('Tenes un envido de ',envidojug)
+    
+    elif tipodecarta2==tipodecarta3:
+        envidojug=20
+        if rndcarta3 not in (10, 11, 12) and rndcarta2 not in (10, 11, 12):
+            envidojug +=rndcarta2+rndcarta3
+            #print('Tenes un envido de ',envidojug)
+    else:
+        envidojug=max(rndcarta1, rndcarta2, rndcarta3)
+        
     
     
     
     if turno == 1:
-        turnohum=input('Es tu turno. Tus cartas son un ' + str(carta1) +', '+ str(carta2) +', '+ str(carta3) +'.Canta envido o pasa. ')
+        turnohum=input('Es tu turno. Tus cartas son un ' + str(carta1) +', '+ str(carta2) +', '+ str(carta3) + '. Tenes un envido de ' + str(envidojug) + '. Canta envido o pasa. ')
         if turnohum == 'Envido' or 'envido':
             print("gola")
     elif turno == 2:
         envido=random.randint(1, 2)
         if envido==1:
-            envidomaq=input('Es el turno de la maquina y te canto envido. Tus cartas son un ' + str(carta1) +', '+ str(carta2) +', '+ str(carta3) +'.Queres envido? Queres pasar? o queres Envido Envido?.')
+            envidomaq=input('Es el turno de la maquina y te canto envido. Tus cartas son un ' + str(carta1) +', '+ str(carta2) +', '+ str(carta3) +'. Tenes un envido de ' + str(envidojug) + '.Queres envido? Queres pasar? o queres Envido Envido?.')
         elif envido == 2:
-            noenvidomaq=input('Es el turno de la maquina y paso. Tus cartas son un ' + str(carta1) +', '+ str(carta2) +', '+ str(carta3) +'.Canta envido o pasa.')
+            noenvidomaq = input('Es el turno de la maquina y paso. Tus cartas son un ' + str(carta1) + ', ' + str(carta2) + ', ' + str(carta3) + '. Tenes un envido de ' + str(envidojug) + '. Canta envido o pasa. ')
 
 else:
     print("hameover")
