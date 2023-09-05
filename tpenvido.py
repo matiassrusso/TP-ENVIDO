@@ -147,7 +147,7 @@ while puntosj1 < 15 and puntosj2 < 15:
     elif 4 == rndpalocarta3_J2:
        carta3_J2=str(numcarta3_J2) +' de basto'
        
-    #CALCULO ENVIDO
+    #CALCULO ENVIDO J2
     envido_J2=0
     if rndpalocarta1_J2 == rndpalocarta2_J2: 
         envido_J2=20
