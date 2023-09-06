@@ -304,7 +304,7 @@ while puntosJ1<0 and puntosJ2<0:
                 
 
 
-print('Game Over')
+print('Game Over.')
 
 
 
