@@ -125,7 +125,7 @@ def envido(array_carta, array_envido):
 
 
 def numero_random(intmaq):
-    intmaq.clear()
+    intmaq=0
     intmaq=random.randint(1, 1000)
     return intmaq
     
@@ -133,178 +133,184 @@ def numero_random(intmaq):
 turno_maq=0
 puntosJ1=0
 puntosJ2=0
-while puntosJ1<0 and puntosJ2<0:
+print("Hola! Este es un juego de envido. Es contra la maquina. El primero en llegar a 15 puntos gana.")
+input("Presiona Enter para continuar...")
+print("Las reglas son las siguientes:\nCuando sea tu turno, escribi 'envido' para cantar envido, y 'paso' para pasar el turno.")
+input("Presiona Enter para continuar...")
+print("Si no es tu turno, y arranca la maquina, los comandos son los siguientes:\n'quiero' para aceptar el envido.\n'no quiero' para rechazar el envido.\nY 'envido envido' para jugar envido envido. Suerte.")
+   
+while puntosJ1<15 and puntosJ2<15:
     carta(cartasJ1)
     carta(cartasJ2)
     turno=random.randint(1, 2)
     numero_random(turno_maq)
     envidoJ1= envido(cartasJ1,pre_envidoJ1)
     envidoJ2 = envido(cartasJ2,pre_envidoJ2)
-   
+
     if turno==1:
-        J1=input(f'Es tu turno. Tus castas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
+        J1=input(f'\nEs tu turno. Tus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
         J1= J1.lower()
         if J1 == 'envido':
             if turno_maq<= 600:
-                print('Maquina: Quiero.')
+                print('\nMaquina: Quiero.')
                 if envidoJ1>envidoJ2:
                     puntosJ1+=3
-                    print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 elif envidoJ2>envidoJ1:
                     puntosJ2+=3
-                    print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                    print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                 elif envidoJ1==envidoJ2:
                     puntosJ1+=3
-                    print(f'Tenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nTenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
             
             elif 600<turno_maq<=900:
-                print('Maquina: No quiero.')
+                print('\nMaquina: No quiero.')
                 puntosJ1+=3
-                print(f'Ganaste. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 
             elif 901<turno_maq<=1000:
-                J1=input('Maquina: Envido envido. ')
+                J1=input('\nMaquina: Envido envido. ')
                 J1= J1.lower()
                 if J1 == 'quiero':
                     if envidoJ1>envidoJ2:
                         puntosJ1+=4
-                        print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     elif envidoJ2>envidoJ1:
                         puntosJ2+=4
-                        print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                        print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                     elif envidoJ1==envidoJ2:
                         puntosJ1+=4
-                        print(f'Tenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nTenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 elif J1 == 'no quiero':
                     puntosJ2+=3
-                    print(f'Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                    print(f'\nAhora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
         
         elif J1 == 'paso':
             #numero_random(turno_maq)
             #turno = 2
             if turno_maq<=750:
-                print('Maquina: Bueno ahora es mi turno. Envido')
-                J1=input(f'Tenes un envido de {envidoJ1}. Queres envido, no queres, o queres envido envido? ')
+                print('\nMaquina: Bueno ahora es mi turno. Envido')
+                J1=input(f'\nTenes un envido de {envidoJ1} de envido. Queres envido, no queres, o queres envido envido? ')
                 J1 = J1.lower()
                 if J1 == 'quiero':
                     if envidoJ1>envidoJ2:
                         puntosJ1+=3
-                        print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     elif envidoJ2>envidoJ1:
                         puntosJ2+=3
-                        print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                        print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                     elif envidoJ1==envidoJ2:
                         puntosJ1+=2
-                        print(f'Tenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nTenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 elif J1 == 'no quiero':
                     puntosJ2+=3
-                    print(f'No quisiste. Se le suman 3 a la maquina. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nNo quisiste. Se le suman 3 a la maquina. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
                 elif J1 == 'envido envido':
                     numero_random(turno_maq)
                     if turno_maq <= 500:
-                        print('Maquina: Quiero')
+                        print('\nMaquina: Quiero')
                         if envidoJ1>envidoJ2:
                             puntosJ1+=4
-                            print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                            print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                         elif envidoJ2>envidoJ1:
                             puntosJ2+=4
-                            print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                            print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                         elif envidoJ1==envidoJ2:
                             puntosJ2+=4
-                            print(f'Tenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                            print(f'\nTenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     elif 500<turno_maq<=1000:
-                        print('Maquina: No quiero.')
+                        print('\nMaquina: No quiero.')
                         puntosJ1+=4
-                        print(f'Ganaste. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
             elif 750<turno_maq<=1000:
-                print('Maquina: Paso.')
-                print(f'La maquina paso. No se le suman puntos a nadie. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                print('\nMaquina: Paso.')
+                print(f'\nLa maquina paso. No se le suman puntos a nadie. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
 
 
     elif turno == 2:
         if turno_maq<=750:
-            print('Maquina: Es mi turno. Envido')
-            J1=input(f'Tenes un envido de {envidoJ1}. Queres envido, no queres, o queres envido envido? ')
+            print('\nMaquina: Es mi turno. Envido')
+            J1=input(f'\nTus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Queres envido, no queres, o queres envido envido? ')
             J1 = J1.lower()
             if J1 == 'quiero':
                 if envidoJ1>envidoJ2:
                     puntosJ1+=3
-                    print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 elif envidoJ2>envidoJ1:
                     puntosJ2+=3
-                    print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                    print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                 elif envidoJ1==envidoJ2:
                     puntosJ1+=2
-                    print(f'Tenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nTenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
             elif J1 == 'no quiero':
                 puntosJ2+=3
-                print(f'No quisiste. Se le suman 3 a la maquina. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                print(f'\nNo quisiste. Se le suman 3 a la maquina. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
             elif J1 == 'envido envido':
                 numero_random(turno_maq)
                 if turno_maq <= 500:
-                    print('Maquina: Quiero')
+                    print('\nMaquina: Quiero')
                     if envidoJ1>envidoJ2:
                         puntosJ1+=4
-                        print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     elif envidoJ2>envidoJ1:
                         puntosJ2+=4
-                        print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                        print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                     elif envidoJ1==envidoJ2:
                         puntosJ2+=4
-                        print(f'Tenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nTenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 elif 500<turno_maq<=1000:
-                    print('Maquina: No quiero.')
+                    print('\nMaquina: No quiero.')
                     puntosJ1+=4
-                    print(f'Ganaste. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
         elif 750<turno_maq<=1000 and turno==2:
-            print('Maquina: Es mi turno. Paso')
+            print('\nMaquina: Es mi turno. Paso')
             turno = 1
-            J1=input(f'Es tu turno. Tus castas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
+            J1=input(f'\nEs tu turno. Tus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
             J1= J1.lower()
             if J1 == 'envido':
                 if turno_maq<= 600 and turno==1:
-                    print('Maquina: Quiero.')
+                    print('\nMaquina: Quiero.')
                     if envidoJ1>envidoJ2:
                         puntosJ1+=3
-                        print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     elif envidoJ2>envidoJ1:
                         puntosJ2+=3
-                        print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                        print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                     elif envidoJ1==envidoJ2:
                         puntosJ1+=3
-                        print(f'Tenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                        print(f'\nTenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 
                 elif 600<turno_maq<=900 and turno==1:
-                    print('Maquina: No quiero.')
+                    print('\nMaquina: No quiero.')
                     puntosJ1+=3
-                    print(f'Ganaste. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                    print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     
                 elif 901<turno_maq<=1000 and turno==1:
-                    J1=input('Maquina: Envido envido. ')
+                    J1=input('\nMaquina: Envido envido. ')
                     J1= J1.lower()
                     if J1 == 'quiero':
                         if envidoJ1>envidoJ2:
                             puntosJ1+=4
-                            print(f'Ganaste. La maquina tenia {envidoJ2}. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                            print(f'\nGanaste. La maquina tenia {envidoJ2} de envido. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                         elif envidoJ2>envidoJ1:
                             puntosJ2+=4
-                            print(f'Perdiste. La maquina tenia {envidoJ2}. Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                            print(f'\nPerdiste. La maquina tenia {envidoJ2} de envido. Ahora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                         elif envidoJ1==envidoJ2:
                             puntosJ1+=4
-                            print(f'Tenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1}, contra {puntosJ2} de la maquina.')
+                            print(f'\nTenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     elif J1 == 'no quiero':
                         puntosJ2+=3
-                        print(f'Ahora la maquina tiene {puntosJ2}, contra {puntosJ1} tuyos.')
+                        print(f'\nAhora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
                 
 
                 
 
 
-print('Game Over.')
+print('\nGame Over.')
 
 
 
