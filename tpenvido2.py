@@ -24,87 +24,70 @@ def carta(array_carta):                  #CREADOR CARTAS [numero, palo]
 
     array_carta[0].extend([num_carta(), palo_carta()])
     array_carta[1].extend([num_carta(), palo_carta()])
+    while array_carta[0] == array_carta[1]:
+        array_carta[1].clear()
+        array_carta[1].extend([num_carta(), palo_carta()])
+
     array_carta[2].extend([num_carta(), palo_carta()])
+    while array_carta[0] == array_carta[2] or array_carta[1] == array_carta[2]:
+        array_carta[2].clear()
+        array_carta[2].extend([num_carta(), palo_carta()])
 
 pre_envidoJ1=0
 pre_envidoJ2=0
 
 
-def envido(array_carta, array_envido):
-    if array_carta[0][1]== array_carta[1][1]:      #SI EL PALO DE LA PRIMERA CARTA ES IGUAL AL PALO DE LA SEGUNDA
-        array_envido=20
-        if array_carta[0][0] not in (10, 11, 12) and array_carta[1][0] not in (10, 11, 12):     #SI LOS NUMEROS DE LAS 2 CARTAS NO SON 10-11-12, SE SUMAN
-            array_envido+=array_carta[0][0] +array_carta[1][0]
-        elif array_carta[0][0] in (10, 11, 12) and array_carta[1][0] in (10, 11, 12):           #SI LOS NUMEROS DE LAS 2 CARTAS SON 10-11-12, NO SUMA NADA
-            array_envido+=0
-        elif array_carta[0][0] not in (10, 11, 12) and array_carta[1][0]in (10, 11, 12):       #SI LOS NUMEROS DE LA PRIMERA CARTA NO SON 10-11-12, PERO DE LA SEGUNDA SI, SE SUMA SOLO LA PRIMERA
-            array_envido+=array_carta[0][0]
-        elif array_carta[0][0]in (10, 11, 12) and array_carta[1][0] not in (10, 11, 12):       #SI LOS NUMEROS DE LA SEGUNDA CARTA NO SON 10-11-12, PERO DE LA SEGUNDA SI, SE SUMA SOLO LA SEGUNDA
-            array_envido+=array_carta[1][0]
+def envido(array_carta, int_envido):
+    if array_carta[2][1] == array_carta[1][1] == array_carta[0][1]:     #SITUACION FLOR
+        int_envido=20
+        cartas_iguales=[array_carta[0][0], array_carta[1][0], array_carta[2][0]]
+        if max(cartas_iguales) >= 10:
+            cartas_iguales.remove(max(cartas_iguales))
+        else:
+            cartas_iguales.remove(min(cartas_iguales))
+        for numero in cartas_iguales:
+            if numero not in (10,11,12):
+                int_envido+=numero
+
+    elif array_carta[0][1]== array_carta[1][1]:      #SI EL PALO DE LA PRIMERA CARTA ES IGUAL AL PALO DE LA SEGUNDA
+        int_envido=20
+        cartas_iguales=[array_carta[0][0],array_carta[1][0]]
+        for numero in cartas_iguales:
+            if numero not in (10,11,12):
+                int_envido+=numero
 
 
     elif array_carta[0][1] == array_carta[2][1]:    #SI EL PALO DE LA PRIMERA CARTA ES IGUAL AL PALO DE LA TERCERA
-        array_envido=20
-        if array_carta[0][0] not in (10, 11, 12) and array_carta[2][0] not in (10, 11, 12):     #SI LOS NUMEROS DE LAS 2 CARTAS NO SON 10-11-12, SE SUMAN
-            array_envido+=array_carta[0][0] + array_carta[2][0]
-
-        elif array_carta[0][0] in (10, 11, 12) and array_carta[2][0] in (10, 11, 12):           #SI LOS NUMEROS DE LAS 2 CARTAS SON 10-11-12, NO SUMA NADA
-            array_envido+=0
-
-        elif array_carta[0][0] not in (10, 11, 12) and array_carta[2][0] in (10, 11, 12):       #SI LOS NUMEROS DE LA PRIMERA CARTA NO SON 10-11-12, PERO DE LA SEGUNDA SI, SE SUMA SOLO LA PRIMERA
-            array_envido+=array_carta[0][0]
-
-        elif array_carta[0][0] in (10, 11, 12) and array_carta[2][0] not in (10, 11, 12):       #SI LOS NUMEROS DE LA SEGUNDA CARTA NO SON 10-11-12, PERO DE LA SEGUNDA SI, SE SUMA SOLO LA SEGUNDA
-            array_envido+=array_carta[2][0]
+        int_envido=20
+        cartas_iguales=[array_carta[0][0],array_carta[2][0]]
+        for numero in cartas_iguales:
+            if numero not in (10,11,12):
+                int_envido+=numero
         
 
     elif array_carta[2][1] == array_carta[1][1]:    #SI EL PALO DE LA TERCERA ES IGUAL AL PALO DE LA SEGUNDA
-        array_envido=20
-        if array_carta[2][0] not in (10, 11, 12) and array_carta[1][0] not in (10, 11, 12):     #SI LOS NUMEROS DE LAS 2 CARTAS NO SON 10-11-12, SE SUMAN
-            array_envido+=array_carta[2][0] + array_carta[1][0]
+        int_envido=20
+        cartas_iguales=[array_carta[2][0],array_carta[1][0]]
+        for numero in cartas_iguales:
+            if numero not in (10,11,12):
+                int_envido+=numero
 
-        elif array_carta[2][0] in (10, 11, 12) and array_carta[1][0] in (10, 11, 12):           #SI LOS NUMEROS DE LAS 2 CARTAS SON 10-11-12, NO SUMA NADA
-            array_envido+=0
-
-        elif array_carta[2][0] not in (10, 11, 12) and array_carta[1][0] in (10, 11, 12):       #SI LOS NUMEROS DE LA PRIMERA CARTA NO SON 10-11-12, PERO DE LA SEGUNDA SI, SE SUMA SOLO LA PRIMERA
-            array_envido+=array_carta[2][0]
-
-        elif array_carta[2][0] in (10, 11, 12) and array_carta[1][0] not in (10, 11, 12):       #SI LOS NUMEROS DE LA SEGUNDA CARTA NO SON 10-11-12, PERO DE LA SEGUNDA SI, SE SUMA SOLO LA SEGUNDA
-            array_envido+=array_carta[1][0]
-
-
-    elif array_carta[2][1] == array_carta[1][1] == array_carta[0][1]:     #SITUACION FLOR
-        array_envido=20
-        if array_carta[2][0] not in (10,11,12) and array_carta[1][0] not in (10,11,12) and array_carta[0][0] not in (10,11,12):
-            templist=[]
-            templist.extend([array_carta[2][0], array_carta[1][0], array_carta[0][0]])
-            templist.sort(reverse=True)
-            array_envido+=templist[0]+templist[1]
-
-        elif array_carta[2][0] in (10,11,12) and array_carta[1][0] not in (10,11,12) and array_carta[0][0] not in (10,11,12):
-            array_envido+=array_carta[1][0]+array_carta[0][0]
-
-        elif array_carta[2][0] not in (10,11,12) and array_carta[1][0] in (10,11,12) and array_carta[0][0] not in (10,11,12):
-            array_envido+=array_carta[2][0]+array_carta[0][0]
-
-        elif array_carta[2][0] not in (10,11,12) and array_carta[1][0] not in (10,11,12) and array_carta[0][0] in (10,11,12):
-            array_envido+=array_carta[1][0]+array_carta[2][0]
-    
+   
     elif array_carta[2][1] != array_carta[1][1] != array_carta[0][1]:     #SITUACION TODOS DISTINTOS
         templist=[]
         templist.extend([array_carta[2][0], array_carta[1][0], array_carta[0][0]])
         templist.sort(reverse=True)
         if templist[0] not in (10,11,12):
-            array_envido+=templist[0]
+            int_envido+=templist[0]
         elif templist[1] not in (10, 11, 12):
-            array_envido+=templist[1]
+            int_envido+=templist[1]
         elif templist[2] not in (10, 11,12):
-            array_envido+=templist[2]
+            int_envido+=templist[2]
         else:
-            array_envido=0
+            int_envido=0
 
-    array_envido = int(array_envido)
-    return array_envido
+    int_envido = int(int_envido)
+    return int_envido
 
 #SISTEMA DE TURNOS
 #SI SALE 1, ES EL TURNO DEL J1. SI SALE 2, ES EL TURNO DEL J2.
@@ -133,13 +116,14 @@ def numero_random(intmaq):
 turno_maq=0
 puntosJ1=0
 puntosJ2=0
-print("Hola! Este es un juego de envido. Es contra la maquina. El primero en llegar a 15 puntos gana.")
+puntos_totales = int(input("Hola! Este es un juego de envido. Es contra la maquina. Hasta cuantos puntos queres jugar? "))
+print(f'Perfecto. El primero en llegar a {puntos_totales} puntos gana. ')
 input("Presiona Enter para continuar...")
 print("Las reglas son las siguientes:\nCuando sea tu turno, escribi 'envido' para cantar envido, y 'paso' para pasar el turno.")
 input("Presiona Enter para continuar...")
 print("Si no es tu turno, y arranca la maquina, los comandos son los siguientes:\n'quiero' para aceptar el envido.\n'no quiero' para rechazar el envido.\nY 'envido envido' para jugar envido envido. Suerte.")
    
-while puntosJ1<15 and puntosJ2<15:
+while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
     carta(cartasJ1)
     carta(cartasJ2)
     turno=random.randint(1, 2)
@@ -150,6 +134,10 @@ while puntosJ1<15 and puntosJ2<15:
     if turno==1:
         J1=input(f'\nEs tu turno. Tus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
         J1= J1.lower()
+        while J1 != 'envido' and J1 != 'paso':
+            J1=input('\n Comando invalido. Proba de nuevo. ')
+            J1= J1.lower()
+
         if J1 == 'envido':
             if turno_maq<= 600:
                 print('\nMaquina: Quiero.')
@@ -171,6 +159,10 @@ while puntosJ1<15 and puntosJ2<15:
             elif 901<turno_maq<=1000:
                 J1=input('\nMaquina: Envido envido. ')
                 J1= J1.lower()
+                while J1 != 'quiero' and J1 != 'no quiero':
+                    J1=input('\n Comando invalido. Proba de nuevo. ')
+                    J1= J1.lower()
+
                 if J1 == 'quiero':
                     if envidoJ1>envidoJ2:
                         puntosJ1+=4
@@ -192,6 +184,10 @@ while puntosJ1<15 and puntosJ2<15:
                 print('\nMaquina: Bueno ahora es mi turno. Envido')
                 J1=input(f'\nTenes un envido de {envidoJ1} de envido. Queres envido, no queres, o queres envido envido? ')
                 J1 = J1.lower()
+                while J1 != 'quiero' and J1 != 'no quiero' and J1 != 'envido envido':
+                    J1=input('\n Comando invalido. Proba de nuevo. ')
+                    J1= J1.lower()
+
                 if J1 == 'quiero':
                     if envidoJ1>envidoJ2:
                         puntosJ1+=3
@@ -234,6 +230,9 @@ while puntosJ1<15 and puntosJ2<15:
             print('\nMaquina: Es mi turno. Envido')
             J1=input(f'\nTus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Queres envido, no queres, o queres envido envido? ')
             J1 = J1.lower()
+            while J1 != 'envido envido' and J1 != 'quiero' and J1 != 'no quiero':
+                J1=input('\n Comando invalido. Proba de nuevo. ')
+                J1= J1.lower()
             if J1 == 'quiero':
                 if envidoJ1>envidoJ2:
                     puntosJ1+=3
@@ -271,6 +270,9 @@ while puntosJ1<15 and puntosJ2<15:
             turno = 1
             J1=input(f'\nEs tu turno. Tus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
             J1= J1.lower()
+            while J1 != 'envido' and J1 != 'paso':
+                J1=input('\n Comando invalido. Proba de nuevo. ')
+                J1= J1.lower()
             if J1 == 'envido':
                 if turno_maq<= 600 and turno==1:
                     print('\nMaquina: Quiero.')
@@ -305,34 +307,12 @@ while puntosJ1<15 and puntosJ2<15:
                     elif J1 == 'no quiero':
                         puntosJ2+=3
                         print(f'\nAhora la maquina tiene {puntosJ2} puntos, contra {puntosJ1} puntos tuyos.')
+            
+            elif J1 == 'paso':
+                print('Los dos pasaron. No se le suman puntos a nadie.')
+                print(f'Ahora vos tenes {puntosJ1} puntos y la maquina tiene {puntosJ2} puntos.') 
                 
 
                 
-
-
 print('\nGame Over.')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
