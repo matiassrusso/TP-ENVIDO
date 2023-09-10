@@ -37,7 +37,8 @@ pre_envidoJ1=0
 pre_envidoJ2=0
 
 
-def envido(array_carta, int_envido):
+def envido(array_carta, int_envido):            #SISTEMA DE CALCULO DEL ENVIDO
+    
     if array_carta[2][1] == array_carta[1][1] == array_carta[0][1]:     #SITUACION FLOR
         int_envido=20
         cartas_iguales=[array_carta[0][0], array_carta[1][0], array_carta[2][0]]
