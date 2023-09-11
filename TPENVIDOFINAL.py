@@ -117,12 +117,21 @@ def numero_random(intmaq):
 turno_maq=0
 puntosJ1=0
 puntosJ2=0
-puntos_totales = int(input("Hola! Este es un juego de envido. Es contra la maquina. Hasta cuantos puntos queres jugar? "))
+while True:
+    try:
+        puntos_totales = int(input("Hola! Este es un juego de envido. Es contra la máquina. Hasta cuántos puntos quieres jugar? "))
+        if puntos_totales <= 0:
+            print("Por favor, ingresa un número de puntos mayor que cero.")
+        else:
+            break
+    except ValueError:
+        print("Por favor, ingresa un número de puntos válido.")
+
 print(f'Perfecto. El primero en llegar a {puntos_totales} puntos gana. ')
 input("Presiona Enter para continuar...")
 print("Las reglas son las siguientes:\nCuando sea tu turno, escribi 'envido' para cantar envido, y 'paso' para pasar el turno.")
 input("Presiona Enter para continuar...")
-print("Si no es tu turno, y arranca la maquina, los comandos son los siguientes:\n'quiero' para aceptar el envido.\n'no quiero' para rechazar el envido.\nY 'envido envido' para jugar envido envido. Suerte.")
+print("Si no es tu turno, y arranca la maquina, los comandos son los siguientes:\n'quiero' para aceptar el envido.\n'no quiero' para rechazar el envido.\nY 'envido' para jugar envido envido. Suerte.")
    
 while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
     carta(cartasJ1)
@@ -140,7 +149,7 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
             J1= J1.lower()
 
         if J1 == 'envido':
-            if turno_maq<= 600:
+            if turno_maq<= 600 or envidoJ2>=25:
                 print('\nMaquina: Quiero.')
                 if envidoJ1>envidoJ2:
                     puntosJ1+=3
@@ -152,13 +161,13 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
                     puntosJ1+=3
                     print(f'\nTenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
             
-            elif 600<turno_maq<=900:
+            elif 600<turno_maq<=900 or envidoJ2 <25:
                 print('\nMaquina: No quiero.')
                 puntosJ1+=3
                 print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 
-            elif 901<turno_maq<=1000:
-                J1=input('\nMaquina: Envido envido. ')
+            elif 901<turno_maq<=1000 or envidoJ2>28:
+                J1=input('\nMaquina: envido. ')
                 J1= J1.lower()
                 while J1 != 'quiero' and J1 != 'no quiero':
                     J1=input('\n Comando invalido. Proba de nuevo. ')
@@ -181,11 +190,11 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
         elif J1 == 'paso':
             #numero_random(turno_maq)
             #turno = 2
-            if turno_maq<=750:
+            if turno_maq<=750 or envidoJ2>=25:
                 print('\nMaquina: Bueno ahora es mi turno. Envido')
                 J1=input(f'\nTenes un envido de {envidoJ1} de envido. Queres envido, no queres, o queres envido envido? ')
                 J1 = J1.lower()
-                while J1 != 'quiero' and J1 != 'no quiero' and J1 != 'envido envido':
+                while J1 != 'quiero' and J1 != 'no quiero' and J1 != 'envido':
                     J1=input('\n Comando invalido. Proba de nuevo. ')
                     J1= J1.lower()
 
@@ -203,9 +212,9 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
                     puntosJ2+=3
                     print(f'\nNo quisiste. Se le suman 3 a la maquina. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
-                elif J1 == 'envido envido':
+                elif J1 == 'envido':
                     numero_random(turno_maq)
-                    if turno_maq <= 500:
+                    if turno_maq <= 500 or envidoJ2>28:
                         print('\nMaquina: Quiero')
                         if envidoJ1>envidoJ2:
                             puntosJ1+=4
@@ -216,22 +225,22 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
                         elif envidoJ1==envidoJ2:
                             puntosJ2+=4
                             print(f'\nTenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
-                    elif 500<turno_maq<=1000:
+                    elif 500<turno_maq<=1000 or envidoJ2<27:
                         print('\nMaquina: No quiero.')
                         puntosJ1+=4
                         print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
-            elif 750<turno_maq<=1000:
+            elif 750<turno_maq<=1000 or envidoJ2<22:
                 print('\nMaquina: Paso.')
                 print(f'\nLa maquina paso. No se le suman puntos a nadie. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
 
 
     elif turno == 2:
-        if turno_maq<=750:
+        if turno_maq<=750 or envidoJ2 >=26:
             print('\nMaquina: Es mi turno. Envido')
             J1=input(f'\nTus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Queres envido, no queres, o queres envido envido? ')
             J1 = J1.lower()
-            while J1 != 'envido envido' and J1 != 'quiero' and J1 != 'no quiero':
+            while J1 != 'envido' and J1 != 'quiero' and J1 != 'no quiero':
                 J1=input('\n Comando invalido. Proba de nuevo. ')
                 J1= J1.lower()
             if J1 == 'quiero':
@@ -248,9 +257,9 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
                 puntosJ2+=3
                 print(f'\nNo quisiste. Se le suman 3 a la maquina. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
-            elif J1 == 'envido envido':
+            elif J1 == 'envido':
                 numero_random(turno_maq)
-                if turno_maq <= 500:
+                if turno_maq <= 500 or envidoJ2>=28:
                     print('\nMaquina: Quiero')
                     if envidoJ1>envidoJ2:
                         puntosJ1+=4
@@ -261,21 +270,21 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
                     elif envidoJ1==envidoJ2:
                         puntosJ2+=4
                         print(f'\nTenian el mismo envido. Gano la maquina por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
-                elif 500<turno_maq<=1000:
+                elif 500<turno_maq<=1000 or envidoJ2<28:
                     print('\nMaquina: No quiero.')
                     puntosJ1+=4
                     print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
 
-        elif 750<turno_maq<=1000 and turno==2:
+        elif 750<turno_maq<=1000 or envidoJ2<21:
             print('\nMaquina: Es mi turno. Paso')
-            turno = 1
+            
             J1=input(f'\nEs tu turno. Tus cartas son: {cartasJ1[0][0]} de {cartasJ1[0][1]}, {cartasJ1[1][0]} de {cartasJ1[1][1]}, y {cartasJ1[2][0]} de {cartasJ1[2][1]}. Tenes un envido de {envidoJ1}. Canta envido o pasa. ')
             J1= J1.lower()
             while J1 != 'envido' and J1 != 'paso':
                 J1=input('\n Comando invalido. Proba de nuevo. ')
                 J1= J1.lower()
             if J1 == 'envido':
-                if turno_maq<= 600 and turno==1:
+                if turno_maq<= 600 or envidoJ2>=25:
                     print('\nMaquina: Quiero.')
                     if envidoJ1>envidoJ2:
                         puntosJ1+=3
@@ -287,13 +296,13 @@ while puntosJ1 < puntos_totales and puntosJ2 < puntos_totales:
                         puntosJ1+=3
                         print(f'\nTenian el mismo envido. Ganaste por mano. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                 
-                elif 600<turno_maq<=900 and turno==1:
+                elif 600<turno_maq<=900 or envidoJ2<25:
                     print('\nMaquina: No quiero.')
                     puntosJ1+=3
                     print(f'\nGanaste. Ahora tenes {puntosJ1} puntos, contra {puntosJ2} puntos de la maquina.')
                     
-                elif 901<turno_maq<=1000 and turno==1:
-                    J1=input('\nMaquina: Envido envido. ')
+                elif 901<turno_maq<=1000 or envidoJ2>28:
+                    J1=input('\nMaquina: envido. ')
                     J1= J1.lower()
                     if J1 == 'quiero':
                         if envidoJ1>envidoJ2:
